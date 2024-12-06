@@ -9,16 +9,16 @@ const port = 3000;
 
 app.use(express.json());
 
-const whitelist = ['http://loalhost:8080', 'https://myapp.co'];
+const whitelist = ['http://localhost:8080', 'https://myapp.co'];
 const options = {
-  origin: (origin, callback)=>{
-    if(whitelist.includes(origin)){
-      callback(null,true) 
-    }else{
-      callback(new Error('no permitido'))
+  origin: (origin, callback) => {
+    if (!origin || whitelist.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('no permitido'));
     }
   }
-}
+};
 app.use(cors(options));
 
 app.get('/api', (req, res) => {
